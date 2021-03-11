@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlendoBot", "BlendoBot\Blen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrPing", "Modules\MrPing\MrPing.csproj", "{841A4C15-23BC-4433-9DF2-2FB114BAE789}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlendoBotLib", "BlendoBotLib\BlendoBotLib.csproj", "{01D849DE-AF80-4A47-B688-E70D62F510CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlendoBot.Core", "BlendoBot.Core\BlendoBot.Core.csproj", "{01D849DE-AF80-4A47-B688-E70D62F510CF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{3CCE0CD2-5174-42BB-B88C-F7F3AA098167}"
 EndProject

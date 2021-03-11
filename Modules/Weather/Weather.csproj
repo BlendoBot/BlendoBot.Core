@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BlendoBotLib\BlendoBotLib.csproj" />
+    <ProjectReference Include="..\..\BlendoBotLib\BlendoBot.Core.csproj" />
   </ItemGroup>
 
 </Project>
