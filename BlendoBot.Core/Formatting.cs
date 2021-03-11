@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlendoBotLib {
+namespace BlendoBot.Core {
 	/// <summary>
 	/// Small useful methods for working with strings in messages.
 	/// </summary>

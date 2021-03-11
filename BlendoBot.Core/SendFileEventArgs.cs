@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlendoBotLib {
+namespace BlendoBot.Core {
 	/// <summary>
 	/// An object that contains various arguments involved with sending a file.
 	/// </summary>

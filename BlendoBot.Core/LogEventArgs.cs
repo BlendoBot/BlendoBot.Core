@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlendoBotLib {
+namespace BlendoBot.Core {
 	/// <summary>
 	/// Various types to help specify between log messages.
 	/// </summary>

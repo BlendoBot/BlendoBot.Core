@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlendoBotLib {
+namespace BlendoBot.Core {
 	public interface IBotMethods {
 		/// <summary>
 		/// Sends a message given a source object (for debugging) and an args object.

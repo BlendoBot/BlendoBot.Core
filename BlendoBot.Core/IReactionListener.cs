@@ -1,7 +1,7 @@
 ﻿using DSharpPlus.EventArgs;
 using System.Threading.Tasks;
 
-namespace BlendoBotLib {
+namespace BlendoBot.Core {
 	/// <summary>
 	/// The public interface for a reaction listener. All reaction listeners must implement this.
 	/// </summary>

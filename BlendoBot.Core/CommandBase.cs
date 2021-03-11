@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlendoBotLib {
+namespace BlendoBot.Core {
 	public abstract class CommandBase {
 		protected CommandBase(ulong guildId, IBotMethods botMethods) {
 			GuildId = guildId;
