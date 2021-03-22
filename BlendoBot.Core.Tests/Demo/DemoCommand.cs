@@ -20,7 +20,7 @@ namespace BlendoBot.Core.Tests.Demo {
 
 		public override string Description => "Responds back, and nothing more.";
 
-		public override string Usage => $"{BotMethods.GetHelpCommandTerm(this, GuildId)}";
+		public override string Usage => $"{BotMethods.GetCommandTerm(this, this)}";
 
 		public override Task OnMessage(MessageCreateEventArgs e) {
 			messagesReceived.Add(e);

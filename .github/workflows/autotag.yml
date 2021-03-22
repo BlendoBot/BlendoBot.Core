@@ -16,8 +16,8 @@ jobs:
       - name: Compute next tag name
         id: compute_tag
         shell: pwsh
+        continue-on-error: true
         run: |
-          $ErrorActionPreference = "Continue"
           $lastTag = $(git describe --tags --abbrev=0)
           if ([string]::IsNullOrEmpty($lastTag)) {
             $newTag = "1.0.0-pre.1"

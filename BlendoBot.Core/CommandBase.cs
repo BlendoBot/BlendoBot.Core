@@ -45,6 +45,12 @@ namespace BlendoBot.Core {
 		public string Name => attribute.Name;
 
 		/// <summary>
+		/// The user-unfriendly name for this command. Should only be referred to by programs to ensure the uniqueness
+		/// of a command.
+		/// </summary>
+		public string Guid => attribute.Guid;
+
+		/// <summary>
 		/// A description of this command. Appears in help.
 		/// </summary>
 		public abstract string Description { get; }

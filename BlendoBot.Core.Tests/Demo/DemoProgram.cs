@@ -11,10 +11,13 @@ namespace BlendoBot.Core.Tests.Demo {
 		public Dictionary<ulong, List<IMessageListener>> GuildMessageListeners { get; set; }
 		public List<LogEventArgs> LogEvents { get; set; }
 
+		public string CommandPrefix { get; set; }
+
 		public DemoProgram() {
 			GuildCommands = new();
 			GuildMessageListeners = new();
 			LogEvents = new();
+			CommandPrefix = "?";
 		}
 
 		public bool AddCommand(ulong guildId, CommandBase command) {
@@ -53,7 +56,7 @@ namespace BlendoBot.Core.Tests.Demo {
 			throw new NotImplementedException();
 		}
 
-		public bool DoesKeyExist(object o, string configHeader, string configKey) {
+		public bool DoesConfigKeyExist(object o, string configHeader, string configKey) {
 			throw new NotImplementedException();
 		}
 
@@ -63,7 +66,7 @@ namespace BlendoBot.Core.Tests.Demo {
 
 		public T GetCommand<T>(object o, ulong guildId) where T : CommandBase {
 			if (GuildCommands.ContainsKey(guildId)) {
-				return GuildCommands[guildId].First(c => c.Value is T).Value as T;
+				return GuildCommands[guildId].FirstOrDefault(c => c.Value is T).Value as T;
 			}
 			return null;
 		}
@@ -77,7 +80,25 @@ namespace BlendoBot.Core.Tests.Demo {
 		}
 
 		public string GetHelpCommandTerm(object o, ulong guildId) {
-			throw new NotImplementedException();
+			return CommandPrefix + "help";
+		}
+
+		public string GetCommandTerm(object o, CommandBase command) {
+			return CommandPrefix + command.Term;
+		}
+
+		public CommandBase GetCommandByTerm(object o, ulong guildId, string term) {
+			if (GuildCommands.ContainsKey(guildId) && GuildCommands[guildId].TryGetValue(term, out CommandBase command)) {
+				return command;
+			}
+			return null;
+		}
+
+		public CommandBase GetCommandByGuid(object o, ulong guildId, string guid) {
+			if (GuildCommands.ContainsKey(guildId)) {
+				return GuildCommands[guildId].Values.FirstOrDefault(c => c.Guid == guid);
+			}
+			return null;
 		}
 
 		public Task<DiscordUser> GetUser(object o, ulong userId) {

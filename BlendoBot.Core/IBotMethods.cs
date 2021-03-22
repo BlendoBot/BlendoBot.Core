@@ -37,7 +37,7 @@ namespace BlendoBot.Core {
 		/// Returns whether a key exists in the config or not. This is useful for commands that wish to provide a
 		/// default value whenever a value does not exist in the config.
 		/// </summary>
-		bool DoesKeyExist(object o, string configHeader, string configKey);
+		bool DoesConfigKeyExist(object o, string configHeader, string configKey);
 
 		/// <summary>
 		/// Writes a string to the config given a source object (for debugging), a given key/value pair and the
@@ -74,6 +74,24 @@ namespace BlendoBot.Core {
 		/// Gets the term used for the help command on a certain guild.
 		/// </summary>
 		string GetHelpCommandTerm(object o, ulong guildId);
+
+		/// <summary>
+		/// Gets the term used for a specific command on a certain guild. This would most likely be the concatenation
+		/// of the command prefix for the guild and the current rename of the command term.
+		/// </summary>
+		string GetCommandTerm(object o, CommandBase command);
+
+		/// <summary>
+		/// Gets the guild instance of a command that corresponds to a term. The term should not include the command
+		/// prefix specified by the program. This should return null if the command does not exist.
+		/// </summary>
+		CommandBase GetCommandByTerm(object o, ulong guildId, string term);
+
+		/// <summary>
+		/// Gets the guild instance of a command that corresponds to a guid. This should return null if the command does
+		/// not exist.
+		/// </summary>
+		CommandBase GetCommandByGuid(object o, ulong guildId, string guid);
 
 		/// <summary>
 		/// Returns a path that this command can use to store persistent data. The command should give this particular

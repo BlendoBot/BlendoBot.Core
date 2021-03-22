@@ -54,7 +54,8 @@ namespace BlendoBot.Core.Tests.Demo {
 			var program = new DemoProgram();
 			var command = new DemoCommand(testGuildId, program);
 			program.AddCommand(testGuildId, command);
-			Assert.Equal("test", command.Usage);
+			program.CommandPrefix = "?";
+			Assert.Equal("?test", command.Usage);
 		}
 
 		[Fact]
