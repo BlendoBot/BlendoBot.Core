@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlendoBot.Core {
+namespace BlendoBot.Core.Utility {
 	/// <summary>
 	/// Small useful methods for working with strings in messages.
 	/// </summary>
-	public static class Formatting {
+	public static class FormattingExtensions {
 		/// <summary>
 		/// Returns a new string with bold tags around the string, or nothing if the string is empty.
 		/// </summary>
@@ -59,6 +59,15 @@ namespace BlendoBot.Core {
 		/// <returns></returns>
 		public static string CodeBlock(this string s) {
 			return string.IsNullOrWhiteSpace(s) ? s : $"```\n{s}\n```";
+		}
+
+		/// <summary>
+		/// Returns a new string with spoiler tags around the string, or nothing if the string is empty.
+		/// </summary>
+		/// <param name="s"></param>
+		/// <returns></returns>
+		public static string Spoiler(this string s) {
+			return string.IsNullOrWhiteSpace(s) ? s : $"||{s}||";
 		}
 	}
 }

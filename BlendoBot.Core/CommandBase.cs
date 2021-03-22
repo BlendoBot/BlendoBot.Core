@@ -1,6 +1,8 @@
 ﻿using DSharpPlus.EventArgs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,19 +11,23 @@ namespace BlendoBot.Core {
 		protected CommandBase(ulong guildId, IBotMethods botMethods) {
 			GuildId = guildId;
 			BotMethods = botMethods;
+			attribute = GetType().GetCustomAttributes(typeof(CommandAttribute)).Single() as CommandAttribute;
+			Version = GetType().Assembly.GetName().Version?.ToString() ?? "1.0.0";
 			Term = DefaultTerm;
 		}
+
+		private CommandAttribute attribute;
 
 		/// <summary>
 		/// The guild ID that this command reacts to. This is useful for commands to load persistent memory related to
 		/// a specific guild.
 		/// </summary>
-		public ulong GuildId { get; }
+		public ulong GuildId { get; init; }
 
 		/// <summary>
 		/// References delegated functions that commands can use to interact with Discord and the program.
 		/// </summary>
-		public IBotMethods BotMethods { get; }
+		public IBotMethods BotMethods { get; init; }
 
 		/// <summary>
 		/// The string that users will need to type in order to access this command.
@@ -31,12 +37,12 @@ namespace BlendoBot.Core {
 		/// <summary>
 		/// The default string that users will need to type in order to access this command.
 		/// </summary>
-		public abstract string DefaultTerm { get; }
+		public string DefaultTerm => attribute.DefaultTerm;
 
 		/// <summary>
 		/// The user-friendly name for this command. Appears in help.
 		/// </summary>
-		public abstract string Name { get; }
+		public string Name => attribute.Name;
 
 		/// <summary>
 		/// A description of this command. Appears in help.
@@ -51,12 +57,12 @@ namespace BlendoBot.Core {
 		/// <summary>
 		/// The author of the command. Appears in about.
 		/// </summary>
-		public abstract string Author { get; }
+		public string Author => attribute.Author;
 
 		/// <summary>
 		/// The version of the command. Appears in about.
 		/// </summary>
-		public abstract string Version { get; }
+		public string Version { get; init; }
 
 		/// <summary>
 		/// The functions that should setup this command. This is very useful for commands that require
