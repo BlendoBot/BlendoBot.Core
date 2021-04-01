@@ -1,4 +1,6 @@
-﻿using DSharpPlus.EventArgs;
+﻿using BlendoBot.Core.Command;
+using BlendoBot.Core.Interfaces;
+using DSharpPlus.EventArgs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,16 +9,13 @@ using System.Threading.Tasks;
 
 namespace BlendoBot.Core.Tests.Demo {
 	[Command(Guid = "blendobot.core.demo.democommand", Name = "Test Command", Author = "Biendeo", DefaultTerm = "test")]
-	class DemoCommand : CommandBase {
-		public DemoCommand(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) {
-			messagesReceived = new List<MessageCreateEventArgs>();
-			IntendedStartupResult = true;
-		}
+	class DemoCommand : BaseCommand {
+		public DemoCommand(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) {}
 
-		public bool StartedUp { get; private set; }
-		public bool IntendedStartupResult { get; set; }
+		public bool StartedUp { get; private set; } = false;
+		public bool IntendedStartupResult { get; set; } = true;
 		public IReadOnlyList<MessageCreateEventArgs> MessagesReceived => messagesReceived;
-		private List<MessageCreateEventArgs> messagesReceived;
+		private readonly List<MessageCreateEventArgs> messagesReceived = new();
 
 		public override string Description => "Responds back, and nothing more.";
 

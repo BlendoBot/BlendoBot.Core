@@ -1,4 +1,7 @@
-﻿using DSharpPlus.Entities;
+﻿using BlendoBot.Core.Command;
+using BlendoBot.Core.Entities;
+using BlendoBot.Core.Interfaces;
+using DSharpPlus.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BlendoBot.Core.Tests.Demo {
 	class DemoProgram : IBotMethods {
-		public Dictionary<ulong, Dictionary<string, CommandBase>> GuildCommands { get; set; }
+		public Dictionary<ulong, Dictionary<string, BaseCommand>> GuildCommands { get; set; }
 		public Dictionary<ulong, List<IMessageListener>> GuildMessageListeners { get; set; }
 		public List<LogEventArgs> LogEvents { get; set; }
 
@@ -20,7 +23,7 @@ namespace BlendoBot.Core.Tests.Demo {
 			CommandPrefix = "?";
 		}
 
-		public bool AddCommand(ulong guildId, CommandBase command) {
+		public bool AddCommand(ulong guildId, BaseCommand command) {
 			if (!GuildCommands.ContainsKey(guildId)) {
 				GuildCommands.Add(guildId, new());
 			}
@@ -35,7 +38,7 @@ namespace BlendoBot.Core.Tests.Demo {
 			}
 		}
 
-		public string GenerateUniqueName(HashSet<string> existingNames, string targetName, int maxAttempts = 100) {
+		public static string GenerateUniqueName(HashSet<string> existingNames, string targetName, int maxAttempts = 100) {
 			if (!existingNames.Contains(targetName)) {
 				return targetName;
 			}
@@ -64,18 +67,18 @@ namespace BlendoBot.Core.Tests.Demo {
 			throw new NotImplementedException();
 		}
 
-		public T GetCommand<T>(object o, ulong guildId) where T : CommandBase {
+		public T GetCommand<T>(object o, ulong guildId) where T : BaseCommand {
 			if (GuildCommands.ContainsKey(guildId)) {
 				return GuildCommands[guildId].FirstOrDefault(c => c.Value is T).Value as T;
 			}
 			return null;
 		}
 
-		public string GetCommandCommonDataPath(object o, CommandBase command) {
+		public string GetCommandCommonDataPath(object o, BaseCommand command) {
 			return "commondatapath";
 		}
 
-		public string GetCommandInstanceDataPath(object o, CommandBase command) {
+		public string GetCommandInstanceDataPath(object o, BaseCommand command) {
 			return "instancedatapath";
 		}
 
@@ -83,18 +86,18 @@ namespace BlendoBot.Core.Tests.Demo {
 			return CommandPrefix + "help";
 		}
 
-		public string GetCommandTerm(object o, CommandBase command) {
+		public string GetCommandTerm(object o, BaseCommand command) {
 			return CommandPrefix + command.Term;
 		}
 
-		public CommandBase GetCommandByTerm(object o, ulong guildId, string term) {
-			if (GuildCommands.ContainsKey(guildId) && GuildCommands[guildId].TryGetValue(term, out CommandBase command)) {
+		public BaseCommand GetCommandByTerm(object o, ulong guildId, string term) {
+			if (GuildCommands.ContainsKey(guildId) && GuildCommands[guildId].TryGetValue(term, out BaseCommand command)) {
 				return command;
 			}
 			return null;
 		}
 
-		public CommandBase GetCommandByGuid(object o, ulong guildId, string guid) {
+		public BaseCommand GetCommandByGuid(object o, ulong guildId, string guid) {
 			if (GuildCommands.ContainsKey(guildId)) {
 				return GuildCommands[guildId].Values.FirstOrDefault(c => c.Guid == guid);
 			}
@@ -114,6 +117,10 @@ namespace BlendoBot.Core.Tests.Demo {
 		}
 
 		public string ReadConfig(object o, string configHeader, string configKey) {
+			throw new NotImplementedException();
+		}
+
+		public string ReadConfigOrDefault(object o, string configHeader, string configKey, string defaultValue) {
 			throw new NotImplementedException();
 		}
 

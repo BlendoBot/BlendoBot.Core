@@ -1,10 +1,12 @@
-﻿using DSharpPlus.Entities;
+﻿using BlendoBot.Core.Command;
+using BlendoBot.Core.Entities;
+using DSharpPlus.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlendoBot.Core {
+namespace BlendoBot.Core.Interfaces {
 	public interface IBotMethods {
 		/// <summary>
 		/// Sends a message given a source object (for debugging) and an args object.
@@ -28,14 +30,21 @@ namespace BlendoBot.Core {
 
 		/// <summary>
 		/// Reads a string from the config given a source object (for debugging), a header name of the config section
-		/// and a given key. The result is null if the key does not exist, either because the section does not exist,
-		/// or whether the specific key does not exist.
+		/// and a given key.
+		/// <exception cref="IndexOutOfRangeException">If the header or key does not exist.</exception>
 		/// </summary>
 		string ReadConfig(object o, string configHeader, string configKey);
 
 		/// <summary>
-		/// Returns whether a key exists in the config or not. This is useful for commands that wish to provide a
-		/// default value whenever a value does not exist in the config.
+		/// Reads a string from the config given a source object (for debugging), a header name of the config section,
+		/// a given key and a default value if that key doesn't exist. The result is null if the key does not exist, either because the section does not exist,
+		/// or whether the specific key does not exist.
+		/// </summary>
+		string ReadConfigOrDefault(object o, string configHeader, string configKey, string defaultValue);
+
+		/// <summary>
+		/// Returns whether a key exists in the config or not. This is useful for commands that wish to change some
+		/// behaviour based on whether a key exists.
 		/// </summary>
 		bool DoesConfigKeyExist(object o, string configHeader, string configKey);
 
@@ -68,7 +77,7 @@ namespace BlendoBot.Core {
 		/// <summary>
 		/// Gets an instance of a command for the given guildId.
 		/// </summary>
-		T GetCommand<T>(object o, ulong guildId) where T : CommandBase;
+		T GetCommand<T>(object o, ulong guildId) where T : BaseCommand;
 
 		/// <summary>
 		/// Gets the term used for the help command on a certain guild.
@@ -79,31 +88,31 @@ namespace BlendoBot.Core {
 		/// Gets the term used for a specific command on a certain guild. This would most likely be the concatenation
 		/// of the command prefix for the guild and the current rename of the command term.
 		/// </summary>
-		string GetCommandTerm(object o, CommandBase command);
+		string GetCommandTerm(object o, BaseCommand command);
 
 		/// <summary>
 		/// Gets the guild instance of a command that corresponds to a term. The term should not include the command
 		/// prefix specified by the program. This should return null if the command does not exist.
 		/// </summary>
-		CommandBase GetCommandByTerm(object o, ulong guildId, string term);
+		BaseCommand GetCommandByTerm(object o, ulong guildId, string term);
 
 		/// <summary>
 		/// Gets the guild instance of a command that corresponds to a guid. This should return null if the command does
 		/// not exist.
 		/// </summary>
-		CommandBase GetCommandByGuid(object o, ulong guildId, string guid);
+		BaseCommand GetCommandByGuid(object o, ulong guildId, string guid);
 
 		/// <summary>
 		/// Returns a path that this command can use to store persistent data. The command should give this particular
 		/// instance a unique path, and the path should exist after this call.
 		/// </summary>
-		string GetCommandInstanceDataPath(object o, CommandBase command);
+		string GetCommandInstanceDataPath(object o, BaseCommand command);
 
 		/// <summary>
 		/// Returns a path that this command can use to store persistent data. The command should give this particular
 		/// instance the same path as every other instance of this command, and the path should exist after this call.
 		/// </summary>
-		string GetCommandCommonDataPath(object o, CommandBase command);
+		string GetCommandCommonDataPath(object o, BaseCommand command);
 
 		/// <summary>
 		/// Returns whether a user for a given guild is an admin. This is true if either the user is a guild admin in

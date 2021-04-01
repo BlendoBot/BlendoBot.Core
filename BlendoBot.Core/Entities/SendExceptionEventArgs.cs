@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BlendoBot.Core {
+namespace BlendoBot.Core.Entities {
 	/// <summary>
 	/// An object that contains various arguments involved with an exception event.
 	/// </summary>
