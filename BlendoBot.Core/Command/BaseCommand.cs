@@ -13,9 +13,9 @@ namespace BlendoBot.Core.Command {
 	/// their own functionality. All command should also include a <see cref="CommandAttribute"/>.
 	/// </summary>
 	public abstract class BaseCommand {
-		protected BaseCommand(ulong guildId, IBotMethods botMethods) {
+		protected BaseCommand(ulong guildId, IBotServiceProvider serviceProvider) {
 			GuildId = guildId;
-			BotMethods = botMethods;
+			ServiceProvider = serviceProvider;
 			attribute = GetType().GetCustomAttributes<CommandAttribute>().Single();
 			DepdenentCommands = GetType().GetCustomAttributes<CommandDependencyAttribute>().Select(cd => cd.DependsOn).ToArray();
 			Version = GetType().Assembly.GetName().Version?.ToString() ?? "1.0.0";
@@ -39,7 +39,7 @@ namespace BlendoBot.Core.Command {
 		/// <summary>
 		/// References delegated functions that commands can use to interact with Discord and the program.
 		/// </summary>
-		public IBotMethods BotMethods { get; init; }
+		public IBotServiceProvider ServiceProvider { get; init; }
 
 		/// <summary>
 		/// The string that users will need to type in order to access this command. This starts with the

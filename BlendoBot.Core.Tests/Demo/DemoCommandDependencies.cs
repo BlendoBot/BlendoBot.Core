@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace BlendoBot.Core.Tests.Demo {
 	[Command(Guid = "blendobot.core.demo.democommandroot", Name = "Test Command", Author = "Biendeo", DefaultTerm = "test")]
 	class DemoCommandRoot : BaseCommand {
-		public DemoCommandRoot(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) { }
+		public DemoCommandRoot(ulong guildId, IBotServiceProvider serviceProvider) : base(guildId, serviceProvider) { }
 
 		public override string Description => throw new NotImplementedException();
 
@@ -28,7 +28,7 @@ namespace BlendoBot.Core.Tests.Demo {
 	[Command(Guid = "blendobot.core.demo.democommandtierone", Name = "Test Command", Author = "Biendeo", DefaultTerm = "test")]
 	[CommandDependency(DependsOn = typeof(DemoCommandRoot))]
 	class DemoCommandTierOne : BaseCommand {
-		public DemoCommandTierOne(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) { }
+		public DemoCommandTierOne(ulong guildId, IBotServiceProvider serviceProvider) : base(guildId, serviceProvider) { }
 
 		public override string Description => throw new NotImplementedException();
 
@@ -46,7 +46,7 @@ namespace BlendoBot.Core.Tests.Demo {
 	[Command(Guid = "blendobot.core.demo.democommandtiertwoa", Name = "Test Command", Author = "Biendeo", DefaultTerm = "test")]
 	[CommandDependency(DependsOn = typeof(DemoCommandTierOne))]
 	class DemoCommandTierTwoA : BaseCommand {
-		public DemoCommandTierTwoA(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) { }
+		public DemoCommandTierTwoA(ulong guildId, IBotServiceProvider serviceProvider) : base(guildId, serviceProvider) { }
 
 		public override string Description => throw new NotImplementedException();
 
@@ -64,7 +64,7 @@ namespace BlendoBot.Core.Tests.Demo {
 	[Command(Guid = "blendobot.core.demo.democommandtiertwob", Name = "Test Command", Author = "Biendeo", DefaultTerm = "test")]
 	[CommandDependency(DependsOn = typeof(DemoCommandTierOne))]
 	class DemoCommandTierTwoB : BaseCommand {
-		public DemoCommandTierTwoB(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) { }
+		public DemoCommandTierTwoB(ulong guildId, IBotServiceProvider serviceProvider) : base(guildId, serviceProvider) { }
 
 		public override string Description => throw new NotImplementedException();
 
@@ -83,7 +83,7 @@ namespace BlendoBot.Core.Tests.Demo {
 	[CommandDependency(DependsOn = typeof(DemoCommandTierTwoA))]
 	[CommandDependency(DependsOn = typeof(DemoCommandTierTwoB))]
 	class DemoCommandTierThree : BaseCommand {
-		public DemoCommandTierThree(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) { }
+		public DemoCommandTierThree(ulong guildId, IBotServiceProvider serviceProvider) : base(guildId, serviceProvider) { }
 
 		public override string Description => throw new NotImplementedException();
 
@@ -101,7 +101,7 @@ namespace BlendoBot.Core.Tests.Demo {
 	[Command(Guid = "blendobot.core.demo.democommandbaddependencyone", Name = "Test Command", Author = "Biendeo", DefaultTerm = "test")]
 	[CommandDependency(DependsOn = typeof(DemoCommandBadDependencyTwo))]
 	class DemoCommandBadDependencyOne : BaseCommand {
-		public DemoCommandBadDependencyOne(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) { }
+		public DemoCommandBadDependencyOne(ulong guildId, IBotServiceProvider serviceProvider) : base(guildId, serviceProvider) { }
 
 		public override string Description => throw new NotImplementedException();
 
@@ -119,7 +119,7 @@ namespace BlendoBot.Core.Tests.Demo {
 	[Command(Guid = "blendobot.core.demo.democommandbaddependencytwo", Name = "Test Command", Author = "Biendeo", DefaultTerm = "test")]
 	[CommandDependency(DependsOn = typeof(DemoCommandBadDependencyOne))]
 	class DemoCommandBadDependencyTwo : BaseCommand {
-		public DemoCommandBadDependencyTwo(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) { }
+		public DemoCommandBadDependencyTwo(ulong guildId, IBotServiceProvider serviceProvider) : base(guildId, serviceProvider) { }
 
 		public override string Description => throw new NotImplementedException();
 

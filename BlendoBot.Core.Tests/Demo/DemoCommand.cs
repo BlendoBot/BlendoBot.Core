@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace BlendoBot.Core.Tests.Demo {
 	[Command(Guid = "blendobot.core.demo.democommand", Name = "Test Command", Author = "Biendeo", DefaultTerm = "test")]
 	class DemoCommand : BaseCommand {
-		public DemoCommand(ulong guildId, IBotMethods botMethods) : base(guildId, botMethods) {}
+		public DemoCommand(ulong guildId, IBotServiceProvider serviceProvider) : base(guildId, serviceProvider) {}
 
 		public bool StartedUp { get; private set; } = false;
 		public bool IntendedStartupResult { get; set; } = true;
@@ -19,7 +19,7 @@ namespace BlendoBot.Core.Tests.Demo {
 
 		public override string Description => "Responds back, and nothing more.";
 
-		public override string Usage => $"{BotMethods.GetCommandTerm(this, this)}";
+		public override string Usage => $"{ServiceProvider.GetService<ICommandManager>().GetCommandTerm(this, this)}";
 
 		public override Task OnMessage(MessageCreateEventArgs e) {
 			messagesReceived.Add(e);
