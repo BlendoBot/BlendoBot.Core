@@ -56,8 +56,10 @@ namespace BlendoBot.Core.Interfaces {
 		string GetCommandPrefix(object o, ulong guildId);
 
 		/// <summary>
-		/// Gets the guild instance of a command that corresponds to a term. The term should not include the command
-		/// prefix specified by the program. This should return null if the command does not exist.
+		/// Gets the guild instance of a command that corresponds to a term. This should be able to handle both cases
+		/// if the supplied term includes or excludes the prefix. If there just so happens to be a valid term in both
+		/// cases where the prefix is applied or not, the term that would match as if no prefix was added should be
+		/// returned.
 		/// </summary>
 		BaseCommand GetCommandByTerm(object o, ulong guildId, string term);
 

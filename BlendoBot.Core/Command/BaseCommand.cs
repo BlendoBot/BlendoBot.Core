@@ -19,7 +19,6 @@ namespace BlendoBot.Core.Command {
 			attribute = GetType().GetCustomAttributes<CommandAttribute>().Single();
 			DepdenentCommands = GetType().GetCustomAttributes<CommandDependencyAttribute>().Select(cd => cd.DependsOn).ToArray();
 			Version = GetType().Assembly.GetName().Version?.ToString() ?? "1.0.0";
-			Term = DefaultTerm;
 		}
 
 		private readonly CommandAttribute attribute;
@@ -42,10 +41,9 @@ namespace BlendoBot.Core.Command {
 		public IBotServiceProvider ServiceProvider { get; init; }
 
 		/// <summary>
-		/// The string that users will need to type in order to access this command. This starts with the
-		/// <see cref="DefaultTerm"/>, but will inevitably be unique for each command within a guild.
+		/// The string that users will need to type in order to access this command. This includes the command prefix.
 		/// </summary>
-		public string Term { get; set; }
+		public string Term => ServiceProvider.GetService<ICommandManager>().GetCommandTerm(this, this);
 
 		/// <summary>
 		/// The default string that users will need to type in order to access this command. This may not necessarily
