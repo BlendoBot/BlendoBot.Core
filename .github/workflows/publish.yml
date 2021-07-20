@@ -22,5 +22,6 @@ jobs:
         with:
           PROJECT_FILE_PATH: BlendoBot.Core/BlendoBot.Core.csproj
           VERSION_REGEX: ^\s*<Version>(.*)<\/Version>\s*$
-          NUGET_KEY: ${{secrets.NUGET_KEY}}
+          NUGET_KEY: ${{secrets.GIT_TOKEN}}
+          NUGET_SOURCE: https://nuget.pkg.github.com/BlendoBot/index.json
           TAG_COMMIT: false
