@@ -16,6 +16,9 @@ jobs:
         with:
           dotnet-version: '5.0.x'
 
+      - name: dotnet restore
+        run: dotnet restore
+
       - name: Publish NuGet Package
         id: publish_nuget
         uses: rohith/publish-nuget@v2
