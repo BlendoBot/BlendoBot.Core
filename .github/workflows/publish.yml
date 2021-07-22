@@ -25,4 +25,6 @@ jobs:
         run: |
           dotnet restore
           dotnet pack --configuration Release
-          dotnet nuget push ((Get-ChildItem -Recurse -Filter "*.nupkg")[0].FullName) --api-key "${{ github.token }}" --source "github.blendobot"
+          dotnet nuget list source
+          (Get-ChildItem -Recurse -Filter "*.nupkg")[0].FullName
+          dotnet nuget push ((Get-ChildItem -Recurse -Filter "*.nupkg")[0].FullName) --api-key "${{ github.token }}" --source "Source"
