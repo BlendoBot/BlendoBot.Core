@@ -19,13 +19,10 @@ jobs:
         env:
           NUGET_AUTH_TOKEN: ${{ github.token }}
 
-      - name: dotnet restore
-        run: dotnet restore
-
       - name: Publish NuGet Package
         id: publish_nuget
         shell: pwsh
         run: |
           dotnet restore
           dotnet pack --configuration Release
-          dotnet nuget push ((Get-ChildItem ".\bin\Release\*.nupkg")[0].FullName) --api-key "${{ github.token }}" --source "Source"
+          dotnet nuget push ((Get-ChildItem -Recurse -Filter "*.nupkg")[0].FullName) --api-key "${{ github.token }}" --source "Source"
