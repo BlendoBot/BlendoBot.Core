@@ -7,6 +7,10 @@
     <PackageId>BlendoBot.Core</PackageId>
     <Version>1.0.0</Version>
     <RepositoryUrl>https://github.com/BlendoBot/BlendoBot.Core</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/BlendoBot/BlendoBot.Core</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>discord;bot</PackageTags>
+    <Description>Contains core interfaces and basic models to create a Discord bot. All modules and implementations interact through these common types.</Description>
   </PropertyGroup>
 
   <ItemGroup>
